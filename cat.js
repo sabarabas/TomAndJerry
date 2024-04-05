@@ -44,7 +44,7 @@ function drawMouse(angle, newmousex, newmousey){
     context.save();
         context.translate(newmousex, newmousey);
         context.rotate(angle + Math.PI/2);
-        context.fillStyle = "darkgrey";
+        context.fillStyle = "white";
         context.beginPath();
         context.ellipse(0, 0, 5, 10, 0, 0, 2*Math.PI);
         context.closePath();
@@ -120,6 +120,18 @@ function inCheese(x, y) {
     return false;
 }
 
+function drawBackground() {
+    context.fillStyle = "#ccc"
+    context.fillRect(0, 0, 500, 500);
+    context.fillStyle = "black";
+    context.beginPath();
+    context.ellipse(200, 450, 40, 100, 0, 0, 2*Math.PI);
+    context.closePath();
+    context.fill();
+    context.fillStyle = "#4f5e6a"
+    context.fillRect(0, 450, 500, 50);
+}
+
 //let framesBeforeChange = 50;
 //let numFrames = 0;
 let a = 0;
@@ -145,6 +157,7 @@ function animate(time) {
 
     if(delta2 > 10){
         context.clearRect(0, 0, canvas.width, canvas.height);
+        drawBackground();
         let newmousex = mousex + Math.cos(a);
         let newmousey = mousey + Math.sin(a);
         if(newmousex >= canvas.width - 150 || newmousex <= 0 || newmousey >= canvas.height || newmousey <= 0
