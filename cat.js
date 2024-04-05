@@ -141,6 +141,7 @@ let catangle = 0;
 let lastAngleTime;
 let lastMoveTime;
 let timeToChange = Math.random()*1250 + 250;
+let oldsina = 0;
 function animate(time) {
     const delta1 = (lastAngleTime ? time - lastAngleTime : 999999);
     const delta2 = (lastMoveTime ? time - lastMoveTime : 999999);
@@ -152,7 +153,7 @@ function animate(time) {
     if(delta1 > timeToChange){
         a = a + (Math.random() - 1/2)*.4*Math.PI;
         lastAngleTime = time;
-        timeToChange = Math.random()*1250 + 250;
+        timeToChange = Math.random()*1000 + 500;
     }
 
     if(delta2 > 10){
@@ -169,6 +170,11 @@ function animate(time) {
             newmousey = mousey + Math.sin(a);
         }
         drawMouse(a, newmousex, newmousey);
+        let position = (time % 5000)/5000.0*2.0*Math.PI;
+        let newsina = Math.cos(position);
+        let deltaa = newsina - oldsina;
+        a = (a + deltaa)%(2*Math.PI);
+        oldsina = newsina;
         //numFrames++;
         mousex = newmousex;
         mousey = newmousey;
